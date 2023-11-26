@@ -1,4 +1,4 @@
-package com.techforb.unicomer.entitites;
+package com.techforb.unicomer.entitites.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

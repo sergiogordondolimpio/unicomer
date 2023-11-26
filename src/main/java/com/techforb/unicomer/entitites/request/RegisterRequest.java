@@ -1,4 +1,4 @@
-package com.techforb.unicomer.entitites;
+package com.techforb.unicomer.entitites.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,9 +7,12 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class LoginRequest {
+@AllArgsConstructor
+public class RegisterRequest {
     String document;
     String password;
+    String documentType;
+    String name;
+    String surname;
 }

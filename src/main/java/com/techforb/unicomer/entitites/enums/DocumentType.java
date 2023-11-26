@@ -1,4 +1,4 @@
-package com.techforb.unicomer.entitites;
+package com.techforb.unicomer.entitites.enums;
 
 public enum DocumentType {
 

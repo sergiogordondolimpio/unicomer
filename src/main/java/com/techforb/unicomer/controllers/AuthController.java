@@ -1,9 +1,9 @@
 package com.techforb.unicomer.controllers;
 
-import com.techforb.unicomer.entitites.AuthResponse;
+import com.techforb.unicomer.entitites.response.AuthResponse;
 import com.techforb.unicomer.services.AuthService;
-import com.techforb.unicomer.entitites.LoginRequest;
-import com.techforb.unicomer.entitites.RegisterRequest;
+import com.techforb.unicomer.entitites.request.LoginRequest;
+import com.techforb.unicomer.entitites.request.RegisterRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

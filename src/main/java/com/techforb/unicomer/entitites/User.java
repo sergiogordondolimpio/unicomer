@@ -3,7 +3,8 @@ package com.techforb.unicomer.entitites;
 import java.util.Collection;
 import java.util.List;
 
-import com.techforb.unicomer.entitites.Role;
+import com.techforb.unicomer.entitites.enums.DocumentType;
+import com.techforb.unicomer.entitites.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,12 +35,16 @@ public class User implements UserDetails {
     Integer id;
     @Basic
     @Column(nullable = false)
-            // username represent the document of the user
+    // username represent the document of the user
     String username;
     @Column(nullable = false)
     String password;
+    @Column(nullable = false)
+    String name;
+    @Column(nullable = false)
+    String surname;
     @Enumerated(EnumType.STRING)
-    String documentType;
+    DocumentType documentType;
     @Enumerated(EnumType.STRING)
     Role role;
 
