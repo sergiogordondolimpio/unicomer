@@ -8,6 +8,7 @@ import com.techforb.unicomer.entitites.request.RegisterRequest;
 import com.techforb.unicomer.entitites.response.AuthResponse;
 import com.techforb.unicomer.handler.ResponseHandler;
 import com.techforb.unicomer.validation.AuthValidation;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthService {
 
+    private static final String PASS_INCORRECT = "Password incorrecto";
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
@@ -33,13 +35,21 @@ public class AuthService {
     @Autowired
     private AuthValidation authValidation;
 
-    public AuthResponse login(LoginRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getDocument(), request.getPassword()));
-        UserDetails user=userRepository.findByUsername(request.getDocument()).orElseThrow();
-        String token=jwtService.getToken(user);
-        return AuthResponse.builder()
-            .token(token)
-            .build();
+    public ResponseEntity<Object> login(LoginRequest request) {
+        ResponseEntity validationResponse = authValidation.loginValidation(request);
+        if (validationResponse != null){
+            return validationResponse;
+        }
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getDocument(), request.getPassword()));
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(PASS_INCORRECT, HttpStatus.UNAUTHORIZED, null);
+        }
+        UserDetails user = userRepository.findByUsername(request.getDocument()).get();
+        String token = jwtService.getToken(user);
+        return ResponseHandler.generateResponse(null, HttpStatus.OK, AuthResponse.builder()
+                .token(token)
+                .build());
 
     }
 
