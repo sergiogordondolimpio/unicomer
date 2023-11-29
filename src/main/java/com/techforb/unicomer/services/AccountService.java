@@ -65,4 +65,14 @@ public class AccountService {
         String accountNumber = generateUUIDNo.substring( generateUUIDNo.length() - 20);
         return accountNumber;
     }
+
+    public Account getAccountById(Integer accountId) {
+        return accountRepository.findById(accountId).get();
+    }
+
+    public void updateBalance(Integer accountId, BigDecimal amount) {
+        Account account = accountRepository.findById(accountId).get();
+        account.setBalance(account.getBalance().add(amount));
+        accountRepository.save(account);
+    }
 }

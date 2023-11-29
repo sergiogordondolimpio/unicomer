@@ -32,21 +32,21 @@ import lombok.NoArgsConstructor;
 public class User implements UserDetails {
     @Id
     @GeneratedValue
-    Integer id;
+    private Integer id;
     @Basic
     @Column(nullable = false)
     // username represent the document of the user
-    String username;
+    private String username;
     @Column(nullable = false)
-    String password;
+    private String password;
     @Column(nullable = false)
-    String name;
+    private String name;
     @Column(nullable = false)
-    String surname;
+    private String surname;
     @Enumerated(EnumType.STRING)
-    DocumentType documentType;
+    private DocumentType documentType;
     @Enumerated(EnumType.STRING)
-    Role role;
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

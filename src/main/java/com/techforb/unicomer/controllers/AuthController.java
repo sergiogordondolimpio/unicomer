@@ -1,6 +1,7 @@
 package com.techforb.unicomer.controllers;
 
 import com.techforb.unicomer.entitites.response.AuthResponse;
+import com.techforb.unicomer.handler.ResponseHandler;
 import com.techforb.unicomer.services.AuthService;
 import com.techforb.unicomer.entitites.request.LoginRequest;
 import com.techforb.unicomer.entitites.request.RegisterRequest;
@@ -22,15 +23,9 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(request));
     }
 
-    @GetMapping(value = "welcome")
-    public String welcome() {
-        return "Welcome this endpoint is not secure";
-    }
-
-
     @PostMapping(value = "register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request)
+    public ResponseEntity<Object> register(@RequestBody RegisterRequest request)
     {
-        return ResponseEntity.ok(authService.register(request));
+        return authService.register(request);
     }
 }

@@ -15,23 +15,21 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="account")
-public class Account {
+@Table(name="transfer")
+public class Transfer {
 
     @Id
     @GeneratedValue
     private Integer id;
     @Basic
     @Column(nullable = false, unique = true)
-    private String accountNumber;
-    @Enumerated(EnumType.STRING)
-    private AccountType accountType;
-    @Enumerated(EnumType.STRING)
-    private Currency currency;
+    private String transferNumber;
     @Column(nullable = false)
-    private BigDecimal balance;
-    @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
-    private User user;
+    private String accountNumberDestiny;
+    @Column(nullable = false)
+    private String accountNumberOrigin;
+    @OneToOne
+    @JoinColumn(name="movement_id", nullable=false)
+    private Movement movement;
 
 }
